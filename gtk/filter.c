@@ -499,7 +499,7 @@ static gboolean test_torrent_activity(tr_torrent* tor, int type)
             st->activity == TR_STATUS_CHECK;
 
     case ACTIVITY_FILTER_PAUSED:
-        return st->activity == TR_STATUS_STOPPED;
+        return st->activity == TR_STATUS_STOPPED && st->finished == FALSE && st->error == 0;
 
     case ACTIVITY_FILTER_FINISHED:
         return st->finished == TRUE;

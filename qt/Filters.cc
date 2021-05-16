@@ -26,7 +26,7 @@ bool FilterMode::test(Torrent const& tor, int mode)
         return tor.isFinished();
 
     case SHOW_PAUSED:
-        return tor.isPaused();
+        return tor.isPaused() && !tor.isFinished() && !tor.hasError();
 
     case SHOW_SEEDING:
         return tor.isSeeding() || tor.isWaitingToSeed();

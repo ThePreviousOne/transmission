@@ -405,7 +405,7 @@ export class Torrent extends EventTarget {
           s === Torrent._StatusDownload || s === Torrent._StatusDownloadWait
         );
       case Prefs.FilterPaused:
-        return this.isStopped();
+        return this.isStopped() && !this.isFinished() && this.error() === 0;
       case Prefs.FilterFinished:
         return this.isFinished();
       default:
