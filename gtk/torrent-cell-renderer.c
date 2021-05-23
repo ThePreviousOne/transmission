@@ -527,15 +527,29 @@ typedef GdkRGBA GtrColor;
 
 static void get_text_color(GtkWidget* w, tr_stat const* st, GtrColor* setme)
 {
-    static GdkRGBA const red = { 1.0, 0, 0, 0 };
+    static GdkRGBA const red = { 0.8, 0.3, 0.3 };
+    static GdkRGBA const green = { 0.3, 0.8, 0.3 };
+    static GdkRGBA const blue = { 0.2, 0.6, 0.95 };
+    static GdkRGBA const yellow = { 0.95, 0.95, 0.45 };
 
     if (st->error != 0)
     {
         *setme = red;
     }
+    else if (st->activity == TR_STATUS_SEED)
+    {
+        *setme = green;
+    }
     else if (st->activity == TR_STATUS_STOPPED)
     {
-        gtk_style_context_get_color(gtk_widget_get_style_context(w), GTK_STATE_FLAG_INSENSITIVE, setme);
+        if (st->finished == true)
+        {
+            *setme = blue;
+        }
+        else
+        {
+            *setme = yellow;
+        }
     }
     else
     {
